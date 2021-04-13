@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    HELLLLLLLOOOOOOOOOOOOO
+    <button onclick="Register()">Register</button>
+    <button onclick="AuthenticatedUser()">AuthenticatedUser</button>
+    <button onclick="Token()">Token</button>
+    <button onclick="Refresh1()">Refresh</button>
+    <script>
+        function Register() {
+            fetch("http://127.0.0.1:8000/api/jwtauth/register/", {
+
+                // Adding method type
+                method: "POST",
+
+                // Adding body or contents to send
+                body: JSON.stringify({
+                    username: "dhruv12345",
+                    email: "dhruv12345@gmail.com",
+                    password: "desai123",
+                    password2: "desai123"
+                }),
+
+                // Adding headers to the request
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+                // Converting to JSON
+                .then(response => response.json())
+
+                // Displaying results to console
+                .then(json => console.log(json));
+        }
+
+        function AuthenticatedUser() {
+            fetch("http://127.0.0.1:8000/api/jwtauth/hello/", {
+
+                // // Adding method type
+                method: "GET",
+
+                // // Adding body or contents to send
+                // body: JSON.stringify({
+                //     username: "dhruv12345",
+                //     email: "dhruv12345@gmail.com",
+                //     password: "desai123",
+                //     password2: "desai123"
+                // }),
+
+                // Adding headers to the request
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE4MzI4NjM3LCJqdGkiOiJkMTg5YWNlZmE0ZTE0NzQ1OTdlYzg3YmM4NDMwMzRiMCIsInVzZXJfaWQiOjl9.sBO185jKClyUoveH2YPMBdbZ-FgE_XhN96jJRCkCXag',
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+                // Converting to JSON
+                .then(response => response.json())
+
+                // Displaying results to console
+                .then(json => console.log(json));
+        }
+
+        function Token() {
+            fetch("http://127.0.0.1:8000/api/jwtauth/token/", {
+                // Adding method type
+                method: "POST",
+
+                // Adding body or contents to send
+                body: JSON.stringify({
+                    username: "dhruv12345",
+                    password: "desai123",
+                }),
+
+                // Adding headers to the request
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+                // Converting to JSON
+                .then(response => response.json())
+
+                // Displaying results to console
+                .then(json => {
+                    console.log(json)
+                    console.log(json.refresh);
+                    let refresh1 = json.refresh;
+                });
+        }
+
+        function Refresh1() {
+            fetch("http://127.0.0.1:8000/api/jwtauth/refresh/", {
+                // Adding method type
+                method: "POST",
+
+                // Adding body or contents to send
+                body: JSON.stringify({
+                    refresh: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTYxODQxNDQ1NywianRpIjoiOTZlMTYwZTEyZDRjNGUzZmFlYjAyMzVmYTU5ODcxZTciLCJ1c2VyX2lkIjo5fQ.RaD0pDWiDTqVPODAYRn5No-m9qwwHaaqCqsyj2wUFa0",
+                }),
+
+                // Adding headers to the request
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+                // Converting to JSON
+                .then(response => response.json())
+
+                // Displaying results to console
+                .then(json => {
+                    console.log(json)
+                    console.log(json.access)
+                });
+        }
+    </script>
+</body>
+
+</html>
